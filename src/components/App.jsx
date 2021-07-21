@@ -4,9 +4,11 @@ function App() {
   const [headingText, setHeadingText] = useState("Hello");
   const [showInput, setShowInput] = useState(true);
 
-  function handleClick() {
+  function handleClick(event) {
     setShowInput(false);
-    setHeadingText(headingText + " " + name);
+    setHeadingText(headingText + " " + name + "!");
+
+    event.preventDefault();
   }
 
   const [hoveredBool, setHoveredBool] = useState(false);
@@ -32,21 +34,23 @@ function App() {
           type="text"
           onChange={handleChange}
           placeholder="What's your name?"
-          name={name}
+          value={name}
         />
       )}
-      <button
-        onClick={handleClick}
-        onMouseOver={isOver}
-        onMouseOut={isOut}
-        style={
-          hoveredBool
-            ? { backgroundColor: "black" }
-            : { backgroundColor: "white" }
-        }
-      >
-        Submit
-      </button>
+      {showInput && (
+        <button
+          onClick={handleClick}
+          onMouseOver={isOver}
+          onMouseOut={isOut}
+          style={
+            hoveredBool
+              ? { backgroundColor: "black" }
+              : { backgroundColor: "white" }
+          }
+        >
+          Submit
+        </button>
+      )}
     </div>
   );
 }
